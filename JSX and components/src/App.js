@@ -27,7 +27,7 @@ const expenses = [
   },
 ];
 
-function App() {
+const App = () => {
   return (
     <div>
       {expenses.map((item) => (
