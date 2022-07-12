@@ -21,7 +21,9 @@ const ExpenseForm = (props) => {
       date: new Date(expenseDate),
       amount: expenseAmount,
     });
-    [setExpenseAmount, setExpenseDate, setExpenseTitle].map((fn) => fn(""));
+    setExpenseAmount("");
+    setExpenseDate("");
+    setExpenseTitle("");
   };
 
   return (
