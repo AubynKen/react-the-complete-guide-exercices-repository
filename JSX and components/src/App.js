@@ -1,4 +1,6 @@
-import ExpenseItems from "./components/ExpenseItems";
+import ExpenseItems from "./components/expenseList/ExpenseItems";
+import NewExpense from "./components/newExpense/NewExpense";
+import {useState} from 'react';
 
 const expenses = [
   {
@@ -28,9 +30,17 @@ const expenses = [
 ];
 
 const App = () => {
+
+  const [expenseItems, setExpenseItems] = useState(expenses);
+
+  const addExpenseItem = (item) => {
+    setExpenseItems([...expenseItems, item]);
+  };
+
   return (
     <div>
-      <ExpenseItems expenses={expenses} />
+      <NewExpense addItem={addExpenseItem}/>
+      <ExpenseItems expenses={expenseItems}/>
     </div>
   );
 };
