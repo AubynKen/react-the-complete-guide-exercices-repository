@@ -3,9 +3,9 @@ import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
   return (
-    <div className="new-expense">
-      <ExpenseForm addItem={props.addItem}/>
-    </div>
+      <div className="new-expense">
+        <ExpenseForm addItem={props.addItem}/>
+      </div>
   );
 };
 

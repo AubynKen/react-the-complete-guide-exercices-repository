@@ -5,6 +5,7 @@ const ExpenseForm = (props) => {
   const [expenseTitle, setExpenseTitle] = useState("");
   const [expenseDate, setExpenseDate] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const titleOnChangeHandler = ({target: {value}}) =>
       setExpenseTitle(value);
@@ -24,7 +25,16 @@ const ExpenseForm = (props) => {
     setExpenseAmount("");
     setExpenseDate("");
     setExpenseTitle("");
+    setIsEditing(false);
   };
+
+  if (!isEditing) {
+    return (
+        <div className="new-expense__control">
+          <button onClick={() => setIsEditing(true)}>Add New Expense</button>
+        </div>
+    );
+  }
 
   return (
       <form onSubmit={onSubmitHandler}>
@@ -57,6 +67,9 @@ const ExpenseForm = (props) => {
         </div>
         <div className="new-expense__actions">
           <button>Submit</button>
+          <button type="button" onClick={() => setIsEditing(false)}>
+            Cancel
+          </button>
         </div>
       </form>
   );
