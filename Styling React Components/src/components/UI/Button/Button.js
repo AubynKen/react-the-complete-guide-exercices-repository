@@ -9,7 +9,11 @@ const StyledButton = styled.button`
   background: #8b005d;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
-  
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
   &:focus {
     outline: none;
   }
@@ -24,9 +28,10 @@ const StyledButton = styled.button`
 
 const Button = props => {
   return (
-    <StyledButton type={props.type} className="button" onClick={props.onClick}>
-      {props.children}
-    </StyledButton>
+      <StyledButton type={props.type} className={`button ${true}`}
+                    onClick={props.onClick}>
+        {props.children}
+      </StyledButton>
   );
 };
 
