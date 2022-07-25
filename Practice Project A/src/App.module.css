@@ -1,0 +1,6 @@
+.main-window {
+    margin: 4rem auto;
+    max-width: 50%;
+    border: 1px solid #999;
+    padding: 3rem;
+}

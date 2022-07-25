@@ -1,0 +1,14 @@
+.card-control {
+    border: 0.3rem solid #999;
+    padding: 0.8rem;
+    margin-top: 0.6rem;
+}
+
+.btn-control {
+    text-align: right;
+}
+
+.btn-control button {
+    border-radius: 6px;
+    background-color: orangered;
+}
