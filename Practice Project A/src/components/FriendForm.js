@@ -39,7 +39,9 @@ const FriendForm = (props) => {
 
   const buttonOnClickHandler = () => {
     if (!validateForm()) return;
-    props.addItem({name, age, id: Math.random().toString()});
+    props.onAddItem({name, age, id: Math.random().toString()});
+    setName('');
+    setAge(0);
   };
 
   return (

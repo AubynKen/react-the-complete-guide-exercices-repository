@@ -17,12 +17,12 @@ function App() {
   };
 
   const addFriend = (friendObj => {
-    setFriends(prevList => [...prevList, friendObj]);
+    setFriends(prevList => [friendObj, ...prevList]);
   });
 
   return (
       <div className={classes['main-window']}>
-        <FriendForm addItem={addFriend}/>
+        <FriendForm onAddItem={addFriend}/>
         <FriendList items={friends} deleteById={deleteById}/>
       </div>
   );

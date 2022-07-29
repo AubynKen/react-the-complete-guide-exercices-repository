@@ -1,15 +1,15 @@
 import React from 'react';
-import classes from './FriendCard.module.css';
+import classes from './FriendItem.module.css';
 
-const FriendCard = (props) => {
+const FriendItem = (props) => {
   return (
-      <div className={classes['card-control']}>
+      <li className={classes['card-control']}>
         {props.name} {props.age}
         <div className={classes['btn-control']}>
           <button type="button" onClick={props.deleteItem}>Delete</button>
         </div>
-      </div>
+      </li>
   );
 };
 
-export default FriendCard;
+export default FriendItem;

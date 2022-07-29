@@ -2,6 +2,7 @@
     border: 0.3rem solid #999;
     padding: 0.8rem;
     margin-top: 0.6rem;
+    list-style-type: none;
 }
 
 .btn-control {

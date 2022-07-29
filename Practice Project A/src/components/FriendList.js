@@ -1,11 +1,11 @@
 import React from 'react';
-import FriendCard from './FriendCard';
+import FriendItem from './FriendItem';
 
 const FriendList = (props) => {
   return (<div>
     <ul>
       {props.items.map((item) =>
-          <FriendCard
+          <FriendItem
               key={item.id}
               name={item.name}
               age={item.age}
