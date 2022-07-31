@@ -1,0 +1,20 @@
+.meal-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.meal-item button {
+    margin-top: 2rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(128, 38, 9)
+}
+
+.control-container {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
