@@ -10,6 +10,7 @@ const Menu = ({ meals }) => {
                    description={description}
                    price={price}
                    key={id}
+                   id={id}
             />),
         )}
       </ul>
