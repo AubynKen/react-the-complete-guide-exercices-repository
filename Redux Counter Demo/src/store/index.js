@@ -6,7 +6,7 @@ const defaultState = { counter: 0 };
 
 const reducer = (state = defaultState, action) => {
   const { counter } = state;
-  const { type } = action;
+  const { type, payload } = action;
   switch (type) {
     case 'increment':
       return {
