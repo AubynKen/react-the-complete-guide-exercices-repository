@@ -1,13 +1,10 @@
 import Counter from './components/Counter';
-import { Provider } from 'react-redux';
-import store from './store';
 
-const App = () => {
+
+function App() {
   return (
-      <Provider store={store}>
-        <Counter/>
-      </Provider>
+    <Counter />
   );
-};
+}
 
 export default App;
