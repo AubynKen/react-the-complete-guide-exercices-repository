@@ -1,21 +1,25 @@
 import classes from './Notification.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { uiActions } from '../../store/ui-slice';
 
-const Notification = (props) => {
-  let specialClasses = '';
+const Notification = () => {
 
-  if (props.status === 'error') {
-    specialClasses = classes.error;
+  const dispatch = useDispatch();
+  const showNotification = useSelector(state => state.ui.showNotification);
+  const { status, title, message } = useSelector(state => state.ui.notification);
+
+  if (!showNotification) return;
+
+  const cssClasses = `${classes.notification} ${status}`;
+
+  const handleClose = () => {
+    dispatch(uiActions.hideNotification());
   }
-  if (props.status === 'success') {
-    specialClasses = classes.success;
-  }
-
-  const cssClasses = `${classes.notification} ${specialClasses}`;
 
   return (
       <section className={cssClasses}>
-        <h2>{props.title}</h2>
-        <p>{props.message}</p>
+        <h2>{title}</h2>
+        <p>{message}<button style={{color: "black"}} onClick={handleClose}>X</button></p>
       </section>
   );
 };
