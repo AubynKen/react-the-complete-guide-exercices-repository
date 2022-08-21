@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route, Link} from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Welcome from "./screens/Welcome";
-import NewBook from './screens/NewBook';
-import Book from './screens/Book';
-import BookList from './screens/BookList';
+import NewBook from "./screens/NewBook";
+import Book from "./screens/Book";
+import BookList from "./screens/BookList";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
         <nav>
           <ul>
             <li>
-              <Link to='/book'>Books</Link>
+              <Link to="/book">Books</Link>
             </li>
             <li>
               <Link to={`/book/new`}>New Book</Link>
@@ -21,9 +21,11 @@ const App: React.FC = () => {
         </nav>
 
         <Routes>
-          <Route path='/book/new' element={<NewBook/>}/>
-          <Route path='/book/' element={<BookList/>}/>
-          <Route path='/book/:id' element={<Book/>}/>
+          <Route path="/books">
+            <Route index element={<BookList/>}/>
+            <Route path=":id" element={<Book/>}/>
+            <Route path="new" element={<NewBook/>}/>
+          </Route>
           <Route path="/" element={<Welcome/>}/>
         </Routes>
       </>
