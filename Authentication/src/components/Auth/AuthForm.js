@@ -8,7 +8,7 @@ const FORM_TYPE = {
   SIGNUP: 'signup',
 };
 
-const API_KEY = 'AIzaSyACv1RS7qaQfIVDRp4WE2xt9Djvl8h9BYQ'; // Public non-secret API key for the client
+const API_KEY = process.env.API_KEY;
 const SIGNUP_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const LOGIN_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
