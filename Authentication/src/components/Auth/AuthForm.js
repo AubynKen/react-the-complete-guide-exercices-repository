@@ -1,19 +1,23 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import classes from './AuthForm.module.css';
+import AuthContext from '../../contexts/AuthContext';
 
 const FORM_TYPE = {
   LOGIN: 'login',
   SIGNUP: 'signup',
 };
 
-const LOGIN_API_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyACv1RS7qaQfIVDRp4WE2xt9Djvl8h9BYQ';
+const API_KEY = 'AIzaSyACv1RS7qaQfIVDRp4WE2xt9Djvl8h9BYQ'; // Public non-secret API key for the client
+const SIGNUP_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+const LOGIN_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
 const AuthForm = () => {
   const [formType, setFormType] = useState(FORM_TYPE.LOGIN);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const authCtx = useContext(AuthContext);
 
   const switchAuthModeHandler = () => {
     setFormType(formType === FORM_TYPE.LOGIN ? FORM_TYPE.SIGNUP : FORM_TYPE.LOGIN);
@@ -25,9 +29,20 @@ const AuthForm = () => {
     const email = emailInputRef.current?.value;
     const password = passwordInputRef.current?.value;
 
-    const loginHelper = async () => {
+    const authHelper = async () => {
       setIsLoading(true);
-      const response = await fetch(LOGIN_API_URL, {
+
+      let requestURL = '';
+      switch (formType) {
+        case FORM_TYPE.SIGNUP:
+          requestURL = SIGNUP_API_URL;
+          break;
+        case FORM_TYPE.LOGIN:
+          requestURL = LOGIN_API_URL;
+          break;
+      }
+
+      const response = await fetch(requestURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,16 +56,27 @@ const AuthForm = () => {
         setIsLoading(false);
         const data = await response.json();
         const errorMessage = data.error?.message;
-        alert(errorMessage ?? 'Authentication failed');
+        alert(errorMessage ?? `${formType === FORM_TYPE.LOGIN ? 'Login' : 'Signup'} failed`);
         return;
       }
       setIsLoading(false);
-      alert('Authentication success!');
+
+      if (formType === FORM_TYPE.SIGNUP) {
+        alert('Signup success!');
+        return;
+      }
+
+      if (formType === FORM_TYPE.LOGIN) {
+        alert('Authentication success!');
+        const data = await response.json();
+        console.log(data); // TODO: remove
+        const authToken = data.idToken;
+        authCtx.login(authToken);
+      }
+
     };
 
-    if (formType === FORM_TYPE.SIGNUP) {
-      loginHelper();
-    }
+    authHelper();
 
   };
 
