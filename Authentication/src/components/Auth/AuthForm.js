@@ -8,11 +8,13 @@ const FORM_TYPE = {
   SIGNUP: 'signup',
 };
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 const SIGNUP_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const LOGIN_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
 const AuthForm = () => {
+  console.log(API_KEY);
+
   const [formType, setFormType] = useState(FORM_TYPE.LOGIN);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
@@ -40,6 +42,8 @@ const AuthForm = () => {
         case FORM_TYPE.LOGIN:
           requestURL = LOGIN_API_URL;
           break;
+        default:
+          console.error("formType should be either FORM_TYPE.SIGNUP or FORM_TYPE.LOGIN!")
       }
 
       const response = await fetch(requestURL, {
@@ -69,7 +73,6 @@ const AuthForm = () => {
       if (formType === FORM_TYPE.LOGIN) {
         alert('Authentication success!');
         const data = await response.json();
-        console.log(data); // TODO: remove
         const authToken = data.idToken;
         authCtx.login(authToken);
       }
